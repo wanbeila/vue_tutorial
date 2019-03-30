@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <script src="../vue.js"></script>
+    <title>Dom样式绑定</title>
+    <style>
+      .activated {
+        color: red
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <!-- 借助class对象绑定 -->
+      <!-- <div @click="handleDivClick" :class="{activated: isActivated}">
+        Hello World
+      </div> -->
+
+      <!-- class与数组绑定 -->
+      <!-- <div @click="handleDivClick" :class="[activated]">
+          Hello World
+      </div> -->
+
+      <!-- style绑定对象 -->
+      <div :style="styleObj" @click="handleDivClick">
+        Hello World
+      </div>
+      <!-- style绑定数组中的对象决定 -->
+      <div :style="[styleObj, {fontSize: '20px'}]" @click="handleDivClick">
+          Hello World
+      </div>
+    </div>
+
+    <script>
+      var vm = new Vue({
+        el: '#app',
+        data: {
+          styleObj: {
+            color: "black"
+          }
+        },
+        methods: {
+          handleDivClick() {
+            this.styleObj.color = this.styleObj.color === "black" ? "red" : "black"
+          }
+        }
+      })
+    </script>
+  </body>
+</html>

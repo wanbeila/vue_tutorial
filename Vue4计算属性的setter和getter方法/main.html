@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <script src="../vue.js"></script>
+    <title>计算属性getter setter</title>
+  </head>
+  <body>
+    <div id="app">
+      {{ message }}
+    </div>
+
+    
+
+    <script>
+
+      var vm = new Vue({
+        el: '#app',
+        template: "<div>{{ message }}</div>",
+        data:{
+          head: "head",
+          body: "body"
+        },
+        computed: {
+          message: {
+            get() {
+              return this.head + ' ' + this.body;
+            },
+            set(value) {
+              var arr = value.split(' ');
+              this.head = arr[0];
+              this.body = arr[1];
+              console.log('set ' + value);
+            }
+          }
+        }
+      });
+    </script>
+  </body>
+</html>

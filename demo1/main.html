@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <script src="../vue.js"></script>
+    <title>demo</title>
+  </head>
+  <body>
+    <div id="app">
+      <input type="text" v-model="todoValue"/>
+      <button v-on:click="clickBtn">提交</button>
+      <ul>
+        <!-- <li v-for="item in items">{{ item }}</li> -->
+        <!-- 将content与item绑定 -->
+        <!-- v-bind:index 可以简写为 :index -->
+        <todo-item  v-bind:content="item" 
+                    v-bind:index="index"
+                    v-for="(item, index) in items"
+                    @delete="handleItemDelete">
+        </todo-item>
+      </ul>
+    </div>
+    <script>
+      // 全局组件的使用
+      // Vue.component("TodoItem", {
+      //   props: ['content'],
+      //   template: "<li>{{ content }}</li>"
+      // });
+
+      // 局部组件的使用
+      // 使用驼峰命名规则，在标签中使用时将大写换成小写并添加"-"
+      var TodoItem = {
+        // 父组件向子组件传值，通过props捕捉属性
+        props: ['content', 'index'],
+        // v-on:click === @click
+        // 在模板中获得值需要使用 "{{  }}"
+        template: "<li @click='handleItemClick'>{{ content }}</li>",
+        methods: {
+          handleItemClick() {
+            // 通过emit，由子组件向外触发事件
+            this.$emit('delete', this.index);
+          }
+        }
+      };
+
+      var app = new Vue({
+        // 通过"el"关键字声明该app作用的范围
+        el: '#app',
+        // 注册局部子组件，全局组件直接使用
+        components: {
+          TodoItem: TodoItem
+        },
+        // 此处的data理解为先声明后在上面调用
+        data: {
+          todoValue: "",
+          items: [],
+          test: "123"
+        },
+        // 此处为方法声明
+        methods: {
+          clickBtn: function() {
+            // 需要使用this关键字来获取
+            this.items.push(this.todoValue);
+            this.todoValue = '';
+          },
+          handleItemDelete(index) {
+            // alert(index);
+            this.items.splice(index, 1);
+          }
+        }
+      });
+    </script>
+  </body>
+</html>

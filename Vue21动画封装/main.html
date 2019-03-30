@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" type="text/css" href="../animate.css" />
+    <script src="../vue.js"></script>
+    <style>
+      .v-enter, .v-leave-to {
+        opacity: 0;
+      }
+      .v-enter-active, .v-leave-active {
+        transition: opacity 1s;
+      }
+    </style>
+    <title>Vue20列表过渡</title>
+  </head>
+  <body>
+    <div id="app">
+      <fade :show="show">
+        <div>hello</div>
+      </fade>
+      <fade :show="show">
+        <h1>hello</h1>
+      </fade>
+      <button @click="handleBtnClick">add</button>
+    </div>
+    <script>
+      // 通过组件来封装动画
+      Vue.component('fade', {
+        props:['show'],
+        // 只能用v-if触发
+        template: '<transition><slot v-if="show"></slot></transition>'
+      });
+
+      var vm = new Vue({
+        el: '#app',
+        data: {
+          show: true
+        },
+        methods: {
+          handleBtnClick() {
+            this.show = !this.show
+          }
+        }
+      })
+    </script>
+  </body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <script src="../vue.js"></script>
+    <title>Vue13非父子组件之间的值传递</title>
+    <!-- Bus/总线、发布订阅模式、观察者模式 -->
+  </head>
+  <body>
+    <div id="app">
+      <child content="WAN"></child>
+      <child content="ZHANG"></child>
+    </div>
+    <script>
+      // 在Vue的prototype上挂载bus属性
+      Vue.prototype.bus = new Vue();
+      Vue.component('child', {
+        props: {
+          content: String
+        },
+        template: '<div @click="handleClick">{{ selfContent }}</div>',
+        methods: {
+          handleClick() {
+            this.bus.$emit('change', this.selfContent)
+          }
+        },
+        mounted() {
+          var this_ = this;
+          this.bus.$on('change', function(msg) {
+            // alert(msg);
+            this_.selfContent = msg;
+          })
+        },
+        data() {
+          return {
+            selfContent: this.content
+          }
+        }
+      })
+      var vm = new Vue({
+        el: '#app',
+        data: {}
+      })
+    </script>
+  </body>
+</html>

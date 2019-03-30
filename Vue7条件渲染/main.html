@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <script src="../vue.js"></script>
+    <title>条件渲染</title>
+  </head>
+  <body>
+    <div id="app">
+      <!-- v-if指令（会修改DOM） -->
+      <!-- <div v-if="show === 'a'">a</div>
+      <div v-else-if="show === 'b'">b</div> -->
+      <!-- v-if和v-else要一起使用 -->
+      <!-- <div v-else>bye bye</div> -->
+      <!-- v-show指令 -->
+      <!-- <div v-show="show">{{msg}}</div> -->
+
+      <!-- key值 避免vue重复使用标签-->
+      <div v-if="show">
+        用户名：<input key="123"/>
+      </div>
+      <div v-else>
+        密码：<input key="456" />
+      </div>
+    </div>
+
+    <script>
+      var vm = new Vue({
+        el: '#app',
+        data: {
+          show: true
+        }
+      })
+    </script>
+  </body>
+</html>

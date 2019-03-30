@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <script src="../vue.js"></script>
+    <title>Vue组件参数校验与非props特性</title>
+    <!-- 非props特性，父组件传递了但是子组件未接收，并且会显示出来 -->
+  </head>
+  <body>
+    <div id="app">
+      <child :content="123"></child>
+    </div>
+    <script>
+      Vue.component('child', {
+        // props: {
+        //   // 约束子组件接收的content类型
+        //   // content: [String, Number]
+        //   // content： {
+        //   //   type: 类型
+        //   // }
+        //   content: {
+        //     type: Number,
+        //     required: false,
+        //     default: 'test',
+        //     validator: function(value) {
+        //       return (value.length > 5)
+        //     }
+        //   } 
+        // },
+        data() {
+          return {}
+        },
+        template: "<div>{{ content }}</div>"
+      })
+
+      var vm = new Vue({
+        el: '#app',
+        data: {
+          total: 0
+        }
+      })
+    </script>
+  </body>
+</html>

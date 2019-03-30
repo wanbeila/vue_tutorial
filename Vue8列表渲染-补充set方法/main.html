@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <script src="../vue.js"></script>
+    <title>列表渲染</title>
+  </head>
+  <body>
+    <div id="app">
+      <!-- 在vue中操作数组不能通过下标（此处的意思是修改值后页面自动更新） -->
+      <!-- 操作数组方式 数组的变异方法 -->
+      <!-- 操作数组第一项 push | pop -->
+      <!-- 操作数组最后一项 shift | unshift -->
+      <!-- 数组截取 splice splice(index, len, [item])
+                                  截取开始下标
+                                  截取长度
+                                  替换的值（可为空）
+      -->
+      <!-- 数组排序 sort -->
+      <!-- 数组取反 reverse -->
+
+      <!-- 还可以改变数组引用的地址 -->
+      <!-- <div v-for="(item, index) of list" :key="item.id">
+        {{ item.text }} --------
+        {{ index }}
+      </div> -->
+
+      <!-- template占位符 -->
+      <!-- <template v-for="(item, index) of list" :key="item.id">
+        <div>
+          {{ item.text }} --------
+        </div>
+        <div>
+          {{ item.id }}
+        </div>
+      </template> -->
+
+      <!-- 对象循环 -->
+      <!-- 此时可以动态修改对象属性，但是无法直接添加属性 -->
+      <!-- 此时可以修改对象的引用 -->
+      <!-- 或者可以利用set方法 -->
+      <!-- 在控制台Vue.set(vm.userInfo, "address", "test") -->
+      <!-- 或者使用实例的set方法vm.$set(userInfo, .....) -->
+      <!-- 数组上的set方法vm.$set(arr, 下标, 值) -->
+      <div v-for="(value, key, index) of userInfo">
+        {{ key }} -- {{ value }} -- {{ index }}
+      </div>
+    </div>
+    <script>
+      var vm = new Vue({
+        el: '#app',
+        data: {
+          userInfo: {
+            name: "wanbeila",
+            age: "222",
+            gender: "male"
+          }
+        }
+      })
+    </script>
+  </body>
+</html>
