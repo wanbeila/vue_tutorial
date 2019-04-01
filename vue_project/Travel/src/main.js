@@ -6,13 +6,17 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 // 引入css样式资源 
-// import './assets/styles/reset.css'
-// import './assets/styles/border.css'
+import './assets/styles/reset.css'
+import './assets/styles/border.css'
 // 解决移动端300ms点击延迟
 import fastclick from 'fastclick'
 import iView from 'iview'
+import 'iview/dist/styles/iview.css';
 
-Vue.use(iView)
+Vue.use(iView, {
+  transfer: true,
+  size: 'large'
+})
 Vue.config.productionTip = false
 fastclick.attach(document.body)
 
